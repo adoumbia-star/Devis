@@ -30,7 +30,7 @@ Sans `DATABASE_URL`, les demandes sont écrites dans `.data/db.json` pour pouvoi
 
 ### Depuis le tableau de bord (sans clé d'API)
 
-1. [Importer le dépôt dans Vercel](https://vercel.com/new/import?s=https://github.com/adoumbia-star/Devis).
+1. [Importer le dépôt dans Vercel](https://vercel.com/new/import?s=https://github.com/adoumbia-star/Devis). Au premier import, Vercel demande d'installer son application GitHub sur le compte `adoumbia-star` : c'est cette étape qui lie le dépôt au projet et déclenche un déploiement à chaque push sur `main`.
 2. Dans le projet : Storage → Create Database → Neon. Vercel renseigne `DATABASE_URL`.
 3. Settings → Environment Variables : ajouter `ADMIN_PASSWORD` et `ADMIN_SECRET`.
 4. Redéployer. Le script `vercel-build` crée les tables et charge le référentiel avant le build.

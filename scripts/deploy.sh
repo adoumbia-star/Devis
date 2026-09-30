@@ -54,6 +54,11 @@ DATABASE_URL="$preview_url" npm run --silent db:setup
 echo "== Vercel : projet ${PROJECT_NAME}"
 vc project add "$PROJECT_NAME" >/dev/null 2>&1 || true
 vc link --yes --project "$PROJECT_NAME" >/dev/null
+# Liaison GitHub : nécessite l'application GitHub de Vercel installée sur le dépôt
+# (vercel.com/dashboard → Settings → Git). Sinon on continue en déploiement direct.
+vc git connect --yes >/dev/null 2>&1 \
+  && echo "   dépôt GitHub lié : chaque push sur main déploiera" \
+  || echo "   dépôt GitHub non lié (installer l'app GitHub de Vercel), déploiement direct"
 
 set_env() { printf '%s' "$2" | vc env add "$1" "$3" --force >/dev/null; }
 set_env DATABASE_URL "$prod_url" production
