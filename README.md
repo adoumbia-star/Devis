@@ -28,6 +28,15 @@ Sans `DATABASE_URL`, les demandes sont écrites dans `.data/db.json` pour pouvoi
 
 ## Déployer sur Vercel
 
+### Depuis le tableau de bord (sans clé d'API)
+
+1. [Importer le dépôt dans Vercel](https://vercel.com/new/import?s=https://github.com/adoumbia-star/Devis).
+2. Dans le projet : Storage → Create Database → Neon. Vercel renseigne `DATABASE_URL`.
+3. Settings → Environment Variables : ajouter `ADMIN_PASSWORD` et `ADMIN_SECRET`.
+4. Redéployer. Le script `vercel-build` crée les tables et charge le référentiel avant le build.
+
+### En ligne de commande
+
 `scripts/deploy.sh` fait tout en une passe : projet Neon (branche `main` pour la production, branche `preview` pour les aperçus Vercel), tables et référentiel chargés sur les deux, variables d'environnement Vercel, puis mise en production.
 
 ```bash

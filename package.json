@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "vercel-build": "if [ -n \"$DATABASE_URL\" ]; then npm run db:setup; fi && next build",
     "start": "next start",
     "db:setup": "tsx src/db/setup.ts"
   },
