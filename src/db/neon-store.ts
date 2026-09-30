@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
+import { databaseUrl } from "@/db/url";
 import { classifyInquiry } from "@/lib/classify";
 import { writeReply } from "@/lib/reply";
 import type {
@@ -20,13 +21,13 @@ import type {
 type Sql = NeonQueryFunction<false, false>;
 
 function db() {
-  const url = process.env.DATABASE_URL;
+  const url = databaseUrl();
   if (!url) return null;
   return neon(url);
 }
 
 export function usesNeon() {
-  return Boolean(process.env.DATABASE_URL);
+  return Boolean(databaseUrl());
 }
 
 export async function createInquiry(input: InquiryInput) {

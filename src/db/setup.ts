@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { neon } from "@neondatabase/serverless";
 import { pains, sectors, solutions } from "../data/catalog";
+import { databaseUrl } from "./url";
 
 function loadEnvFile(name: string) {
   try {
@@ -23,7 +24,7 @@ function loadEnvFile(name: string) {
 async function main() {
   loadEnvFile(".env.local");
   loadEnvFile(".env");
-  const url = process.env.DATABASE_URL;
+  const url = databaseUrl();
   if (!url) {
     console.error("DATABASE_URL est absent. Copiez .env.example vers .env.local puis relancez.");
     process.exit(1);
