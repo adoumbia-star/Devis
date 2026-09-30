@@ -1,9 +1,10 @@
 import { jsonStore } from "@/db/json-store";
 import * as neonStore from "@/db/neon-store";
+import { databaseUrl } from "@/db/url";
 import type { ContactChannel, InquiryInput, InquiryStatus, ProposalStatus } from "@/lib/types";
 
 function neonEnabled() {
-  return Boolean(process.env.DATABASE_URL);
+  return Boolean(databaseUrl());
 }
 
 export function storageMode() {
