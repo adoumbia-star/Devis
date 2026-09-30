@@ -25,3 +25,18 @@ Sans `DATABASE_URL`, les demandes sont écrites dans `.data/db.json` pour pouvoi
 2. Copier `.env.example` vers `.env.local` et renseigner `DATABASE_URL`, `ADMIN_PASSWORD`, `ADMIN_SECRET`.
 3. `npm run db:setup` crée les tables et charge le référentiel.
 4. Relancer `npm run dev`. Les nouvelles demandes sont alors classées dans PostgreSQL.
+
+## Déployer sur Vercel
+
+`scripts/deploy.sh` fait tout en une passe : projet Neon (branche `main` pour la production, branche `preview` pour les aperçus Vercel), tables et référentiel chargés sur les deux, variables d'environnement Vercel, puis mise en production.
+
+```bash
+NEON_API_KEY=... VERCEL_TOKEN=... ADMIN_PASSWORD=... ./scripts/deploy.sh
+```
+
+- `NEON_API_KEY` : console.neon.tech → Account settings → API keys.
+- `VERCEL_TOKEN` : vercel.com/account/tokens. Ajouter `VERCEL_SCOPE=<slug-equipe>` si le projet doit vivre dans une équipe.
+- `ADMIN_SECRET` est généré s'il est absent ; `OPENAI_API_KEY` est transmis s'il est défini.
+- `PROJECT_NAME` (défaut `devis-sud-contractors`) et `NEON_REGION` (défaut `aws-eu-central-1`) sont modifiables.
+
+Le script est rejouable : il réutilise le projet Neon et le projet Vercel s'ils existent déjà.
